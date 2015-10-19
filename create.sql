@@ -6,7 +6,7 @@ CREATE TABLE Movie (
 	year INT,
 	rating VARCHAR(10),
 	company VARCHAR(50),
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
 	CHECK (id >= 0)
 ) ENGINE = INNODB;
 
@@ -20,7 +20,7 @@ CREATE TABLE Actor (
 	sex VARCHAR(6) NOT NULL,
 	dob DATE NOT NULL,
 	dod DATE,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
 	CHECK (id >= 0),
 	CHECK ((dod IS NOT NULL and dob IS NOT NULL and dob < dod) or dod IS NULL)
 ) ENGINE = INNODB;
@@ -72,7 +72,7 @@ CREATE TABLE Review (
 	mid INT NOT NULL,
 	rating INT,
 	comment VARCHAR(500),
-	FOREIGN KEY (mid) REFERENCES Movie(id)
+	FOREIGN KEY (mid) REFERENCES Movie(id),
 	CHECK (rating > 0 AND rating <= 5)
 ) ENGINE = INNODB;
 
