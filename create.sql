@@ -12,7 +12,6 @@ CREATE TABLE Movie (
 
 -- Primary key should be ID since there should be one unique ID per actor.
 -- There should not be a negative ID
--- If Date of Death and Date of Birth exists, Date of Death should be after Date of Birth
 CREATE TABLE Actor (
 	id INT NOT NULL,
 	last VARCHAR(20) NOT NULL,
@@ -21,22 +20,19 @@ CREATE TABLE Actor (
 	dob DATE NOT NULL,
 	dod DATE,
 	PRIMARY KEY (id)
-	CHECK (id >= 0),
-	CHECK((`dod` IS NOT NULL and `dob` IS NOT NULL and `dob` < `dod`) or `dod` IS NULL)
+	CHECK (id >= 0)
 ) ENGINE = INNODB;
 
 -- Primary key should be ID since there should be one unique ID per director.
 -- There should not be a negative ID
--- If Date of Death and Date of Birth exists, Date of Death should be after Date of Birth
 CREATE TABLE Director (
 	id INT NOT NULL,
 	last VARCHAR(20) NOT NULL,
 	first VARCHAR(20) NOT NULL,
 	dob DATE NOT NULL,
 	dod DATE,
-	PRIMARY KEY (id)
-	CHECK (id >= 0),
-	CHECK((`dod` IS NOT NULL and `dob` IS NOT NULL and `dob` < `dod`) or `dod` IS NULL)
+	PRIMARY KEY (id),
+	CHECK (id >= 0)
 ) ENGINE = INNODB;
 
 -- mid should be the same as Movie table's id
