@@ -1,0 +1,1 @@
+Dong Joon worked on the *.sql files and Joshua worked on the query.php file. Particular difficulty was encountered when trying to decide if it was okay to use mysqli functions or use the deprecated mysql ones. After some bugs, we realized we needed to use the older functions for this project.

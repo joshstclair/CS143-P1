@@ -3,27 +3,29 @@
 <p> Insert your query in the box below </p>
 <br>
 <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-   <textarea name="query" rows="10" cols="50"><?php echo $prev_query;?></textarea>
+   <textarea name="query" rows="10" cols="50"><?php echo $_GET["query"];?></textarea>
    <br>
    <input type="submit"/>
 </form>
 <?php
 
 if ($_GET["query"]) {
-     $prev_query = $_GET["query"];
      $db_connection = mysql_connect("localhost", "cs143", "");
 
-     mysql_select_db("TEST", $db_connection); // change TEST to CS143 when done testing
+     mysql_select_db("CS143", $db_connection); 
      if(!$db_connection) {
     	$errmsg = mysql_error($db_connection);
     	print "Connection failed: $errmsg <br />";
    		exit(1);
 	   }
+       //$sanitized_query = mysql_real_escape_string($_GET["query"], $db_connection);
+       //echo $sanitized_query;
      if ($rs = mysql_query($_GET["query"], $db_connection)) 
      {
-         									  // TODO: check for sanitization of characters
+         
          $cols = mysql_num_fields($rs);
-         echo "<table><tr>";
+         echo "<h2> Results from MySQL:</h2>";
+         echo "<table border=\"1\"><tr>";
          while ($finfo = mysql_fetch_field($rs))
          {
             echo "<th>" . $finfo->name . "</th>";
