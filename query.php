@@ -3,43 +3,39 @@
 <p> Insert your query in the box below </p>
 <br>
 <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-   <textarea name="query" rows="10" cols="50"></textarea>
+   <textarea name="query" rows="10" cols="50"><?php echo $prev_query;?></textarea>
    <br>
    <input type="submit"/>
 </form>
 <?php
 
 if ($_GET["query"]) {
-    
+     $prev_query = $_GET["query"];
      $db_connection = mysql_connect("localhost", "cs143", "");
 
-     mysql_select_db("cs143", $db_connection); // change TEST to cs143 when done testing
+     mysql_select_db("TEST", $db_connection); // change TEST to CS143 when done testing
      if(!$db_connection) {
     	$errmsg = mysql_error($db_connection);
     	print "Connection failed: $errmsg <br />";
    		exit(1);
 	   }
-       $test = "SELECT * FROM Actor WHERE id=10"; 
-     if ($rs = mysql_query($test, $db_connection)) // change $test to $_GET["query"]
+     if ($rs = mysql_query($_GET["query"], $db_connection)) 
      {
          									  // TODO: check for sanitization of characters
-         $cols = mysqli_num_fields($rs);
-         
+         $cols = mysql_num_fields($rs);
          echo "<table><tr>";
-         while ($finfo = mysqli_fetch_field($rs))
+         while ($finfo = mysql_fetch_field($rs))
          {
-            echo "test1";
             echo "<th>" . $finfo->name . "</th>";
          }
          echo "</tr>";
-         while ($rows = mysqli_fetch_array($rs, MYSQLI_NUM))
+         while ($rows = mysql_fetch_array($rs, MYSQL_NUM))
          {
-            echo "test2";
             $i = 0;
             echo "<tr>";
             while ($i < $cols)
             {
-              echo "<td>" . $rows[i] . "</td>";
+              echo "<td>" . $rows[$i] . "</td>";
               $i++;
             }
             echo "</tr>";
