@@ -1,12 +1,12 @@
 <html>
 <head>
-<title>Add new actor / director</title>
+<title>Add a new actor / director</title>
 </head>
 <body>
     <?php
     $identity = $first = $last = $sex = $dob = $dod = "";
     ?>
-    <h2>Add New Actor / Director</h2>
+    <h2>Add a New Actor / Director</h2>
     <form method="GET" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
    Identity:
    <input type="radio" name="identity" value="actor">Actor

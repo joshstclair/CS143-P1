@@ -6,7 +6,7 @@
     <?php
     $title = $company = $year = $rating = "";
     ?>
-    <h2>Add a Movie</h2>
+    <h2>Add a New Movie</h2>
     <form method="GET" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
     Title: <input type="text" name="title">
     <br><br>
