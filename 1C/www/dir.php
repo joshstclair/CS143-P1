@@ -9,6 +9,7 @@
 				<li><a href="./addMovie.php" target="main">Add Movie Information</a></li>
 				<li><a href="./addMovieToActor.php" target="main">Add Movie / Actor Relation</a></li>
 				<li><a href="./addMovieToDirector.php" target="main">Add Movie / Director Relation</a></li>
+				<li><a href="./addComment.php" target="main">Add Comments</a></li>
 			</ul>
 	</body>
 </html>
