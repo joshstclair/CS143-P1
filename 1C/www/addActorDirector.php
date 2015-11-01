@@ -88,9 +88,9 @@ if (isset($_GET['submit'])) {
         // Adding a director to Director table
         else {
             if ($isDodSet) {
-                $directorAddQuery = "INSERT INTO Director VALUES($maximumPersonID, '$last', '$first', '$sex', '$dob', '$dod')";
+                $directorAddQuery = "INSERT INTO Director VALUES($maximumPersonID, '$last', '$first', '$dob', '$dod')";
             } else {
-                $directorAddQuery = "INSERT INTO Director VALUES($maximumPersonID, '$last', '$first', '$sex', '$dob', null)";
+                $directorAddQuery = "INSERT INTO Director VALUES($maximumPersonID, '$last', '$first', '$dob', null)";
             }
             if (mysql_query($directorAddQuery, $db_connection)) {
                 echo "Added $first $last to the database!";
