@@ -2,7 +2,6 @@
 <body>
 
 <?php
-//TODO: Change TEST to CS143 when done
 
 if ($_GET['type'] != "movie" && $_GET['type'] != "actor")
 {
@@ -14,7 +13,7 @@ if ($_GET["type"] == "movie")
 {
     $db_connection = mysql_connect("localhost", "cs143", "");
 
-    mysql_select_db("TEST", $db_connection); 
+    mysql_select_db("CS143", $db_connection); 
     if(!$db_connection) {
         $errmsg = mysql_error($db_connection);
         print "Connection failed: $errmsg <br />";
@@ -144,7 +143,7 @@ if ($_GET["type"] == "movie")
         $j++;
     }
     echo "<br><b> Rating: </b>" . $movie_info_res['rating'] . "<br>";
-    echo "<br> ......CAST......<br>";
+    echo "<br><b> ......CAST......</b><br>";
     $j = 0;
     while ($j < $num_movie_actors)
     {
@@ -159,7 +158,7 @@ if ($_GET["type"] == "movie")
     $movie_rev_ratings = "SELECT AVG(rating) as avg, COUNT(*) as total FROM Review WHERE mid = " . $_GET["movie_id"] . ";";
     $movie_rev_ratings_res;
 
-    echo "<br> ....... Reviews ....... <br>";
+    echo "<br><b> ....... Reviews ....... </b><br>";
 
     // get average rating
     if ($result = mysql_query($movie_rev_ratings, $db_connection)) {
@@ -209,7 +208,7 @@ else
 {
     $db_connection = mysql_connect("localhost", "cs143", "");
 
-    mysql_select_db("TEST", $db_connection); 
+    mysql_select_db("CS143", $db_connection); 
     if(!$db_connection) {
         $errmsg = mysql_error($db_connection);
         print "Connection failed: $errmsg <br />";

@@ -4,11 +4,10 @@
 <h2> Search Results </h2>
 
 <?php
-//TODO: Change TEST to CS143 when done
 if ($_GET["search"]) {
     $db_connection = mysql_connect("localhost", "cs143", "");
 
-    mysql_select_db("TEST", $db_connection); 
+    mysql_select_db("CS143", $db_connection); 
     if(!$db_connection) {
     	$errmsg = mysql_error($db_connection);
     	print "Connection failed: $errmsg <br />";
