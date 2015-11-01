@@ -3,49 +3,7 @@
 
 <?php
 //TODO: Change TEST to CS143 when done
-if ($_GET["query"]) {
-     $db_connection = mysql_connect("localhost", "cs143", "");
 
-     mysql_select_db("TEST", $db_connection); 
-     if(!$db_connection) {
-    	$errmsg = mysql_error($db_connection);
-    	print "Connection failed: $errmsg <br />";
-   		exit(1);
-	   }
-       //$sanitized_query = mysql_real_escape_string($_GET["query"], $db_connection);
-       //echo $sanitized_query;
-     if ($rs = mysql_query($_GET["query"], $db_connection)) 
-     {
-         
-         $cols = mysql_num_fields($rs);
-         echo "<h2> Results from MySQL:</h2>";
-         echo "<table border=\"1\"><tr>";
-         while ($finfo = mysql_fetch_field($rs))
-         {
-            echo "<th>" . $finfo->name . "</th>";
-         }
-         echo "</tr>";
-         while ($rows = mysql_fetch_array($rs, MYSQL_NUM))
-         {
-            $i = 0;
-            echo "<tr>";
-            while ($i < $cols)
-            {
-              echo "<td>" . $rows[$i] . "</td>";
-              $i++;
-            }
-            echo "</tr>";
-         }
-         echo "</table>";
-
-     }
-     else
-     {
-        print "Error processing the query <br>";
-        exit();
-     }
-     mysql_close($db_connection);
-}
 if ($_GET['type'] != "movie" && $_GET['type'] != "actor")
 {
     $_GET["type"] = "movie";
@@ -198,7 +156,7 @@ if ($_GET["type"] == "movie")
     // User Reviews
     $movie_review = "SELECT * FROM Review WHERE mid = " . $_GET["movie_id"] . ";";
     $movie_review_res; // array of reviews
-    $movie_rev_ratings = "SELECT AVG(rating) as ave, COUNT(*) as total FROM Review WHERE mid = " . $_GET["movie_id"] . ";";
+    $movie_rev_ratings = "SELECT AVG(rating) as avg, COUNT(*) as total FROM Review WHERE mid = " . $_GET["movie_id"] . ";";
     $movie_rev_ratings_res;
 
     echo "<br> ....... Reviews ....... <br>";
@@ -206,15 +164,15 @@ if ($_GET["type"] == "movie")
     // get average rating
     if ($result = mysql_query($movie_rev_ratings, $db_connection)) {
         
-        if (mysql_result($result, 0, 'AVG') == false)
+        if (mysql_result($result, 0, 'avg') == false)
         {
             echo "No reviews for this movie<br>Be the first to ";
             echo "<a href = \"addComment.php\"> Add a Review </a>";
         }
         else
         {
-            echo "Average rating: " . mysql_result($result, 0, 'AVG') . "/5 (" . mysql_result($result, 0, 'total') . " reviews)<br>";
-            echo "<a href = \"addComment.php\"> Add a review </a>";
+            echo "Average rating: " . mysql_result($result, 0, 'avg') . "/5 (" . mysql_result($result, 0, 'total') . " reviews)<br>";
+            echo "<a href = \"addComment.php\"> Add a review </a><br><br>";
         }
     }
     else
@@ -226,7 +184,10 @@ if ($_GET["type"] == "movie")
     if ($result = mysql_query($movie_review, $db_connection)) {
         while ($review = mysql_fetch_assoc($result))
         {
-            echo $review['name'] . "<br>";
+            if ($review['name'] == "")
+                echo "<b> Anonymous </b><br>";
+            else  
+                echo "<b>" . $review['name'] . "</b><br>";
             echo $review['time'] . "<br>";
             echo "Rating: " . $review['rating'] . "<br>";
             echo $review['comment'] . "<br>";

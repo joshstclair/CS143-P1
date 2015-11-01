@@ -16,5 +16,11 @@
 				<li><a href="./displayInfo.php?type=movie&movie_id=100" target="main">Browse Movies</a></li>
 				<li><a href="./displayInfo.php?type=actor&actor_id=20852" target="main">Browse Actors</a></li>
 			</ul>
+		Search:
+			<form method="GET" action="./search.php" target="main">
+   			<input type="text" name="search">
+   			<br>
+   			<input type="submit"/>
+		</form>
 	</body>
 </html>
