@@ -27,7 +27,7 @@
         ?>
         </select>
         <br><br>
-        Actor: <select name="director">
+        Director: <select name="director">
         <?php
             while ($dir = mysql_fetch_assoc($directorList)) {
                 echo '<option value="' . $dir['id'] . '">' . $dir['name'] . '</option>';
